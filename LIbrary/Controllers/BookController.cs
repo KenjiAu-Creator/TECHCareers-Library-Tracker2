@@ -12,7 +12,7 @@ namespace LIbrary.Controllers
     public static List<Book> Books = new List<Book>();
     public IActionResult Index()
     {
-      return View();
+      return RedirectToAction("List");
     }
 
     public IActionResult Create()
@@ -22,6 +22,7 @@ namespace LIbrary.Controllers
 
     public IActionResult List()
     {
+      ViewBag.Books = Books;
       return View();
     }
 
