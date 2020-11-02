@@ -43,7 +43,7 @@ namespace LIbrary.Controllers
       return View();
     }
 
-    public IActionResult Details()
+    public IActionResult Details(int id)
     {
       return View();
     }
@@ -67,9 +67,10 @@ namespace LIbrary.Controllers
       // This method will extend the given book with the IDs due date by 7 days.
     }
 
-    public static void ReturnBookByID()
+    public static void ReturnBookByID(int _id)
     {
       // This method will set the ReturnedDate of the Book object with the given ID to the current date.
+      GetBookByID(_id).ReturnedDate = DateTime.Now;
     }
     public static void DeleteBookByID(int _id)
     {
