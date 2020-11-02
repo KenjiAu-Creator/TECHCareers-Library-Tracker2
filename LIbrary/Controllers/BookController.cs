@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using LIbrary.Models;
@@ -16,8 +17,17 @@ namespace LIbrary.Controllers
       return RedirectToAction("List");
     }
 
-    public IActionResult Create()
+    // The GET parameters name must match the variables names exactly.
+    public IActionResult Create(int id, string title, string author, string pub_date)
     {
+      if ((title != null && author != null) && pub_date != null)
+      {
+        // Year-month-date
+        // 2020-11-04
+        DateTime pubDate = DateTime.Parse(pub_date);
+        CreateBook(id, title, author, pubDate, DateTime.Now);
+        return RedirectToAction("Index");
+      }
       return View();
     }
 
