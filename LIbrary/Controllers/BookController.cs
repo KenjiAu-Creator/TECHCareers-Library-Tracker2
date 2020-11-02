@@ -10,6 +10,7 @@ namespace LIbrary.Controllers
   public class BookController : Controller
   {
     public static List<Book> Books = new List<Book>();
+
     public IActionResult Index()
     {
       return RedirectToAction("List");
@@ -22,6 +23,12 @@ namespace LIbrary.Controllers
 
     public IActionResult List()
     {
+      // Testing add new book.
+      DateTime _a = new DateTime(2020, 5, 1);
+      DateTime _b = new DateTime(2020, 6, 1);
+      Book testBook = new Book(1, "Hoopers", "Daniel Ross", _a, _b);
+
+      Books.Add(testBook);
       ViewBag.Books = Books;
       return View();
     }
