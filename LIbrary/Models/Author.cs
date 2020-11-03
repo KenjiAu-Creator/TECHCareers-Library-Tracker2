@@ -27,7 +27,7 @@ namespace LIbrary.Models
     public DateTime BirthDate { get; set; }
 
     [Column(TypeName = "date")]
-    public DateTime DeathDate { get; set; }
+    public DateTime? DeathDate { get; set; }
 
     // Create virtual property for linking the foreign key. Link the Inverse property to each other.
     [InverseProperty(nameof(Models.Book.Author))]

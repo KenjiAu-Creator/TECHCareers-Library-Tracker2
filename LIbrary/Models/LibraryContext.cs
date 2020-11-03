@@ -24,7 +24,6 @@ namespace LIbrary.Models
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-      // Since the Shelf model has a Name property which is a string (text) we need to apply Collation.
       modelBuilder.Entity<Book>(entity =>
       {
         string keyName = "FK_" + nameof(Book) + "_" + nameof(Author);
@@ -44,6 +43,29 @@ namespace LIbrary.Models
         .OnDelete(DeleteBehavior.Cascade)
         .HasConstraintName(keyName);
 
+        entity.HasData(
+          new Book()
+          {
+            ID = -1,
+            Title = "The Cat in the Hat",
+            PublicationDate = new DateTime(1957,3,12),
+            AuthorID = -5
+          },
+          new Book()
+          {
+            ID = -2,
+            Title = "Green Eggs and Ham",
+            PublicationDate = new DateTime(1960,8,12),
+            AuthorID = -5
+            },
+          new Book()
+          {
+            ID = -3,
+            Title = "Oh, the Places You'll Go!",
+            PublicationDate = new DateTime(1990,1,22),
+            AuthorID = -5
+          }
+        );
       });
 
       modelBuilder.Entity<Author>(entity =>
@@ -58,6 +80,44 @@ namespace LIbrary.Models
         entity.HasMany(thisEntity => thisEntity.Books)
         .WithOne(parent => parent.Author)
         .OnDelete(DeleteBehavior.Restrict);
+
+        entity.HasData(
+          new Author()
+          {
+            // DateTime gots yyyy-mm-dd
+            ID = -1,
+            Name = "Mitch Albom",
+            BirthDate = new DateTime(1958,6,23),
+            DeathDate = null
+          },
+          new Author()
+          {
+            ID = -2,
+            Name = "Daniel Handler",
+            BirthDate = new DateTime(1970,02,28),
+            DeathDate = null
+          },
+          new Author()
+          {
+            ID = -3,
+            Name = "J.R.R. Tolkien",
+            BirthDate = new DateTime(1892,1,3),
+            DeathDate = new DateTime(1973,9,2)
+          },
+          new Author()
+          {
+            ID = -4,
+            Name = "George R. R. Martin",
+            BirthDate = new DateTime(1948, 9, 20),
+            DeathDate = null
+          },
+          new Author()
+          {
+            ID = -5,
+            Name = "Dr. Seuss",
+            BirthDate = new DateTime(1904,3,4),
+            DeathDate = new DateTime(1991,9,24)
+          }) ;
       });
 
       modelBuilder.Entity<Borrow>(entity =>

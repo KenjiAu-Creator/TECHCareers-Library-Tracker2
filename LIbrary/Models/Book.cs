@@ -13,16 +13,16 @@ namespace LIbrary.Models
     [Key]
     [Column(TypeName = "int(10)")]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int ID { get; private set; }
+    public int ID { get; set; }
 
     [Column(TypeName = "varchar(100)")]
-    public string Title { get; private set; }
+    public string Title { get; set; }
 
     [Column(TypeName = "date")]
-    public DateTime PublicationDate { get; private set; }
+    public DateTime PublicationDate { get; set; }
 
     [Column(TypeName = "int(10)")]
-    public int AuthorID { get; private set; }
+    public int AuthorID { get; set; }
 
     // Create the foreign key link to Author
     // Point the Inverse property at each other.
