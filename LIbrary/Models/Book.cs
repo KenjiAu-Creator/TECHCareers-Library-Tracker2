@@ -26,7 +26,7 @@ namespace LIbrary.Models
       this.PublicationDate = _pubDate;
 
       // The due date should be set to 14 days after the checkout.
-      this.DueDate = _checkedOutDate;
+      this.DueDate = _checkedOutDate.AddDays(14);
     }
   }
 }

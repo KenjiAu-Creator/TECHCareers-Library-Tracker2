@@ -48,7 +48,6 @@ namespace LIbrary.Controllers
       DateTime _a = new DateTime(2020, 5, 1);
       DateTime _b = new DateTime(2020, 6, 1);
       Book testBook = new Book(1, "Hoopers", "Daniel Ross", _a, _b);
-
       Books.Add(testBook);
       ViewBag.Books = Books;
       return View();
@@ -73,9 +72,10 @@ namespace LIbrary.Controllers
       return Books.Where(x => x.ID == _id).SingleOrDefault();
     }
 
-    public static void ExtendDueDateForBookByID()
+    public static void ExtendDueDateForBookByID(int _id)
     {
       // This method will extend the given book with the IDs due date by 7 days.
+      Books.Where(x => x.ID == _id).SingleOrDefault().DueDate.AddDays(7);
     }
 
     public static void ReturnBookByID(int _id)
