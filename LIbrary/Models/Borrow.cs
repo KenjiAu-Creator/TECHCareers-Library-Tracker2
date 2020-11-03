@@ -27,6 +27,8 @@ namespace LIbrary.Models
     [Column(TypeName ="int(10)")]
     public int BookID { get; set; }
 
+    // Create foreign key link to Book
+    // Point Inverse property to Book.
     [ForeignKey(nameof(BookID))]
     [InverseProperty(nameof(Models.Book.Borrow))]
     public virtual Book Book { get; set; }
