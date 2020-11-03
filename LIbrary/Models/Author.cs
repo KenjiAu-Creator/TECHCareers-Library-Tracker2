@@ -20,6 +20,9 @@ namespace LIbrary.Models
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int ID { get; set; }
 
+    [Column(TypeName = "varchar(60)")]
+    public string Name { get; set; }
+
     [Column(TypeName = "date")]
     public DateTime BirthDate { get; set; }
 

@@ -29,5 +29,9 @@ namespace LIbrary.Models
     [ForeignKey(nameof(AuthorID))]
     [InverseProperty(nameof(Models.Author.Books))]
     public virtual Author Author { get; set; }
+
+    // One Book has One borrow associated with it.
+    [InverseProperty(nameof(Models.Borrow.Book))]
+    public virtual Borrow Borrow { get; set; }
   }
 }

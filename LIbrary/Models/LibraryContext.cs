@@ -28,14 +28,10 @@ namespace LIbrary.Models
       modelBuilder.Entity<Book>(entity =>
       {
         string keyName = "FK_" + nameof(Book) + "_" + nameof(Author);
+        // Collation text fields
         entity.Property(e => e.Title)
         .HasCharSet("utf8mb4")
         .HasCollation("utf8mb4_general_ci");
-
-        // Seed the database with existing data
-        /*        entity.HasData(
-
-                );*/
 
         // Index Creation
         entity.HasIndex(e=> e.AuthorID)
@@ -48,6 +44,32 @@ namespace LIbrary.Models
         .OnDelete(DeleteBehavior.Cascade)
         .HasConstraintName(keyName);
 
+      });
+
+      modelBuilder.Entity<Author>(entity =>
+      {
+        // Collation text fields
+        entity.Property(e => e.Name)
+        .HasCharSet("utf8mb4")
+        .HasCollation("utf8mb4_general_ci");
+
+        entity.OwnsMany(thisEntity => thisEntity.Books)
+        .OnDelete(DeleteBehavior.Restrict);
+      });
+
+      modelBuilder.Entity<Borrow>(entity =>
+      {
+        string keyName = "FK_" + nameof(Borrow) + "_" + nameof(Book);
+        // Index Creation
+        entity.HasIndex(e => e.BookID)
+        .HasName(keyName);
+
+        // FK Creation
+        entity.HasOne(thisEntity => thisEntity.Book)
+        .WithMany(parent => parent.Borrows)
+        .HasForeignKey(thisEntity => thisEntity.BookID)
+        .OnDelete(DeleteBehavior.Cascade)
+        .HasConstraintName(keyName);
       });
     }
 }

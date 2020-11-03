@@ -23,5 +23,12 @@ namespace LIbrary.Models
 
     [Column(TypeName = "date")]
     public int ReturnedDate { get; private set; }
+
+    [Column(TypeName ="int(10)")]
+    public int BookID { get; set; }
+
+    [ForeignKey(nameof(BookID))]
+    [InverseProperty(nameof(Models.Book.Borrow))]
+    public virtual Book Book { get; set; }
   }
 }
