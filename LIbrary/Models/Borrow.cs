@@ -13,16 +13,16 @@ namespace LIbrary.Models
     [Key]
     [Column(TypeName = "int(10)")]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int ID { get; private set; }
+    public int ID { get; set; }
 
     [Column(TypeName = "date")]
-    public DateTime CheckedOutDate { get; private set; }
+    public DateTime CheckedOutDate { get; set; }
 
     [Column(TypeName = "date")]
-    public DateTime DueDate { get; private set; }
+    public DateTime DueDate { get; set; }
 
     [Column(TypeName = "date")]
-    public DateTime ReturnedDate { get; private set; }
+    public DateTime? ReturnedDate { get; set; }
 
     [Column(TypeName ="int(10)")]
     public int BookID { get; set; }

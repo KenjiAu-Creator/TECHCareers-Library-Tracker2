@@ -133,6 +133,34 @@ namespace LIbrary.Models
         .HasForeignKey<Borrow>(thisEntity => thisEntity.BookID)
         .OnDelete(DeleteBehavior.NoAction)
         .HasConstraintName(keyName);
+
+        DateTime checkout = new DateTime(2019, 12, 25);
+        entity.HasData(
+          new Borrow()
+          {
+            ID = -1,
+            CheckedOutDate = checkout,
+            DueDate = checkout.AddDays(14),
+            ReturnedDate = checkout.AddDays(14),
+            BookID = -1
+          },
+          new Borrow()
+          {
+            ID = -2,
+            CheckedOutDate = checkout,
+            DueDate = checkout.AddDays(14),
+            ReturnedDate = checkout.AddDays(21),
+            BookID = -2
+          },
+          new Borrow()
+          {
+            ID = -3,
+            CheckedOutDate = checkout,
+            DueDate = checkout.AddDays(14),
+            ReturnedDate = null,
+            BookID = -3
+          }
+          );
       });
     }
   }
