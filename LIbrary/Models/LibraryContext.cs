@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LIbrary.Models;
 
 namespace LIbrary.Models
 {
@@ -163,5 +164,7 @@ namespace LIbrary.Models
           );
       });
     }
+
+    public DbSet<LIbrary.Models.Author> Author { get; set; }
   }
 }
