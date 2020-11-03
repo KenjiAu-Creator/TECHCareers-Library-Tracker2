@@ -53,7 +53,10 @@ namespace LIbrary.Models
         .HasCharSet("utf8mb4")
         .HasCollation("utf8mb4_general_ci");
 
-        entity.OwnsMany(thisEntity => thisEntity.Books)
+        // Authors have many books
+        // Books only have one author
+        entity.HasMany(thisEntity => thisEntity.Books)
+        .WithOne(parent => parent.Author)
         .OnDelete(DeleteBehavior.Restrict);
       });
 
@@ -66,9 +69,9 @@ namespace LIbrary.Models
 
         // FK Creation
         entity.HasOne(thisEntity => thisEntity.Book)
-        .WithMany(parent => parent.Borrows)
-        .HasForeignKey(thisEntity => thisEntity.BookID)
-        .OnDelete(DeleteBehavior.Cascade)
+        .WithOne(parent => parent.Borrow)
+        .HasForeignKey<Borrow>(thisEntity => thisEntity.BookID)
+        .OnDelete(DeleteBehavior.NoAction)
         .HasConstraintName(keyName);
       });
     }
