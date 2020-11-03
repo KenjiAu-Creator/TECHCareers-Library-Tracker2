@@ -25,7 +25,14 @@ namespace LIbrary.Controllers
       {
         try
         {
-          // Create the book
+          // Create the book block
+          foreach(Book book in Books)
+          { // Make sure that the ID supplied is unique to the library
+            if(book.ID == id)
+            {
+              throw new Exception("That ID is already taken in the library! Please choose another one.");
+            }
+          }
           // Year-month-date
           // 2020-11-04
           DateTime pubDate = DateTime.Parse(pub_date);
