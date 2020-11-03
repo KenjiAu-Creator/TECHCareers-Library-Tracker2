@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using LIbrary.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 
 namespace LIbrary.Controllers
 {
@@ -22,11 +23,21 @@ namespace LIbrary.Controllers
     {
       if ((title != null && author != null) && pub_date != null)
       {
-        // Year-month-date
-        // 2020-11-04
-        DateTime pubDate = DateTime.Parse(pub_date);
-        CreateBook(id, title, author, pubDate, DateTime.Now);
-        return RedirectToAction("Index");
+        try
+        {
+          // Create the book
+          // Year-month-date
+          // 2020-11-04
+          DateTime pubDate = DateTime.Parse(pub_date);
+          CreateBook(id, title, author, pubDate, DateTime.Now);
+          Book newBook = Books.Last();
+          ViewBag.message = $"You have successfully checked out {newBook.Title} until {newBook.DueDate}";
+          return RedirectToAction("Index");
+        }
+        catch (Exception e)
+        {
+          ViewBag.message = $"ERROR: Unable to check out the book: {e.Message}";
+        }
       }
       return View();
     }

@@ -4,6 +4,10 @@
 }
 
 <h1>Create a request to borrow a book!</h1>
+@if(ViewBag.message != null)
+{
+    <p>@(ViewBag.message)</p>
+}
 
 <form action="/Book/Create" method="GET">
     <label for="id">ID</label>
