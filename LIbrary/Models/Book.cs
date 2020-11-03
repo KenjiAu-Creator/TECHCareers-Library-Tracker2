@@ -11,6 +11,7 @@ namespace LIbrary.Models
     public string Title { get; set; }
 
     public DateTime PublicationDate { get; set; }
+    public DateTime CheckedOutDate { get; set; }
 
     public DateTime DueDate { get; set; }
 
@@ -24,6 +25,7 @@ namespace LIbrary.Models
       this.Title = _title;
       this.Author = _author;
       this.PublicationDate = _pubDate;
+      this.CheckedOutDate = _checkedOutDate;
 
       // The due date should be set to 14 days after the checkout.
       this.DueDate = _checkedOutDate.AddDays(14);

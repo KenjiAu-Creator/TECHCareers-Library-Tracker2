@@ -55,6 +55,8 @@ namespace LIbrary.Controllers
 
     public IActionResult Details(int id)
     {
+      Book book = Books.Where(x => x.ID == id).SingleOrDefault();
+      ViewBag.Book = book;
       return View();
     }
     
