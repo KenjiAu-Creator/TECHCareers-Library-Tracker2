@@ -21,6 +21,8 @@ namespace LIbrary.Controllers
         // GET: Authors
         public async Task<IActionResult> Index()
         {
+            /*List<Author> TestList = GetAuthors();
+            ViewBag.Authors = TestList;*/
             return View(await _context.Author.ToListAsync());
         }
 
@@ -148,5 +150,15 @@ namespace LIbrary.Controllers
         {
             return _context.Author.Any(e => e.ID == id);
         }
+
+      public static List<Author> GetAuthors()
+      {
+        // This method will return a list of authors.
+        using (LibraryContext context = new LibraryContext())
+        {
+          List<Author> AuthorList = context.Author.ToList();
+          return AuthorList;
+        }
+      }
     }
 }

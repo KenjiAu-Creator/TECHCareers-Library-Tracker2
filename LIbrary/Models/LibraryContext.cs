@@ -9,6 +9,8 @@ namespace LIbrary.Models
 {
   public class LibraryContext : DbContext
   {
+    public DbSet<LIbrary.Models.Author> Author { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
       if (!optionsBuilder.IsConfigured)
@@ -164,7 +166,5 @@ namespace LIbrary.Models
           );
       });
     }
-
-    public DbSet<LIbrary.Models.Author> Author { get; set; }
   }
 }
