@@ -10,6 +10,11 @@ namespace LIbrary.Models
   [Table("author")]
   public class Author
   {
+    public Author()
+    {
+      Books = new HashSet<Book>();
+    }
+
     [Key]
     [Column(TypeName = "int(10)")]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -20,5 +25,9 @@ namespace LIbrary.Models
 
     [Column(TypeName = "date")]
     public DateTime DeathDate { get; set; }
+
+    // Create virtual property for linking the foreign key. Link the Inverse property to each other.
+    [InverseProperty(nameof(Models.Book.Author))]
+    public virtual ICollection<Book> Books { get; set; }
   }
 }

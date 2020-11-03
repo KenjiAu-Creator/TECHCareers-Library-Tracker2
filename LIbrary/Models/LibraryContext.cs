@@ -27,11 +27,8 @@ namespace LIbrary.Models
       // Since the Shelf model has a Name property which is a string (text) we need to apply Collation.
       modelBuilder.Entity<Book>(entity =>
       {
+        string keyName = "FK_" + nameof(Book) + "_" + nameof(Author);
         entity.Property(e => e.Title)
-        .HasCharSet("utf8mb4")
-        .HasCollation("utf8mb4_general_ci");
-
-        entity.Property(e => e.Author)
         .HasCharSet("utf8mb4")
         .HasCollation("utf8mb4_general_ci");
 
@@ -39,6 +36,17 @@ namespace LIbrary.Models
         /*        entity.HasData(
 
                 );*/
+
+        // Index Creation
+        entity.HasIndex(e=> e.AuthorID)
+        .HasName(keyName);
+
+        // FK Creation
+        entity.HasOne(thisEntity => thisEntity.Author)
+        .WithMany(parent => parent.Books)
+        .HasForeignKey(thisEntity => thisEntity.AuthorID)
+        .OnDelete(DeleteBehavior.Cascade)
+        .HasConstraintName(keyName);
 
       });
     }

@@ -24,5 +24,10 @@ namespace LIbrary.Models
     [Column(TypeName = "int(10)")]
     public int AuthorID { get; private set; }
 
+    // Create the foreign key link
+    // Point the Inverse property at each other.
+    [ForeignKey(nameof(AuthorID))]
+    [InverseProperty(nameof(Models.Author.Books))]
+    public virtual Author Author { get; set; }
   }
 }
