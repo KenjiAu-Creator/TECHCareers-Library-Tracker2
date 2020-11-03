@@ -21,46 +21,16 @@ namespace LIbrary.Controllers
     // The GET parameters name must match the variables names exactly.
     public IActionResult Create(int id, string title, string author, string pub_date)
     {
-      if ((title != null && author != null) && pub_date != null)
-      {
-        try
-        {
-          // Create the book block
-          foreach(Book book in Books)
-          { // Make sure that the ID supplied is unique to the library
-            if(book.ID == id)
-            {
-              throw new Exception("That ID is already taken in the library! Please choose another one.");
-            }
-          }
-          // Year-month-date
-          // 2020-11-04
-          DateTime pubDate = DateTime.Parse(pub_date);
-          CreateBook(id, title, author, pubDate, DateTime.Now);
-          Book newBook = Books.Last();
-          ViewBag.message = $"You have successfully checked out {newBook.Title} until {newBook.DueDate}";
-          return RedirectToAction("Index");
-        }
-        catch (Exception e)
-        {
-          ViewBag.message = $"ERROR: Unable to check out the book: {e.Message}";
-        }
-      }
       return View();
     }
 
     public IActionResult List()
     {
-      Book newBook = new Book(1, "Test", "Tester", DateTime.Now, DateTime.Now);
-      Books.Add(newBook);
-      ViewBag.Books = Books;
       return View();
     }
 
     public IActionResult Details(int id)
     {
-      Book book = Books.Where(x => x.ID == id).SingleOrDefault();
-      ViewBag.Book = book;
       return View();
     }
     
@@ -68,8 +38,7 @@ namespace LIbrary.Controllers
     public static void CreateBook(int _id, string _title, string _author, DateTime _pubDate, DateTime _checkedOutDate)
     {
       // This method will create a Book object and add it to the Books list.
-      Book newBook = new Book(_id, _title, _author, _pubDate, _checkedOutDate);
-      Books.Add(newBook);
+      
     }
 
     public static Book GetBookByID(int _id)
@@ -81,18 +50,18 @@ namespace LIbrary.Controllers
     public static void ExtendDueDateForBookByID(int _id)
     {
       // This method will extend the given book with the IDs due date by 7 days.
-      Books.Where(x => x.ID == _id).SingleOrDefault().DueDate.AddDays(7);
+      
     }
 
     public static void ReturnBookByID(int _id)
     {
       // This method will set the ReturnedDate of the Book object with the given ID to the current date.
-      GetBookByID(_id).ReturnedDate = DateTime.Now;
+      
     }
     public static void DeleteBookByID(int _id)
     {
       // This method will remove the Book object with the given ID from the Books list.
-      Books.Remove(GetBookByID(_id));
+     
     }
   }
 }

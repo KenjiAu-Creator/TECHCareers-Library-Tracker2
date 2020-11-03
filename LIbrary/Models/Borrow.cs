@@ -16,13 +16,13 @@ namespace LIbrary.Models
     public int ID { get; private set; }
 
     [Column(TypeName = "date")]
-    public string CheckedOutDate { get; private set; }
+    public DateTime CheckedOutDate { get; private set; }
 
     [Column(TypeName = "date")]
     public DateTime DueDate { get; private set; }
 
     [Column(TypeName = "date")]
-    public int ReturnedDate { get; private set; }
+    public DateTime ReturnedDate { get; private set; }
 
     [Column(TypeName ="int(10)")]
     public int BookID { get; set; }

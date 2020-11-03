@@ -21,7 +21,7 @@ namespace LIbrary.Models
         optionsBuilder.UseMySql(connection, x => x.ServerVersion(version));
       }
     }
-    
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
       // Since the Shelf model has a Name property which is a string (text) we need to apply Collation.
@@ -34,7 +34,7 @@ namespace LIbrary.Models
         .HasCollation("utf8mb4_general_ci");
 
         // Index Creation
-        entity.HasIndex(e=> e.AuthorID)
+        entity.HasIndex(e => e.AuthorID)
         .HasName(keyName);
 
         // FK Creation
@@ -75,4 +75,5 @@ namespace LIbrary.Models
         .HasConstraintName(keyName);
       });
     }
+  }
 }
