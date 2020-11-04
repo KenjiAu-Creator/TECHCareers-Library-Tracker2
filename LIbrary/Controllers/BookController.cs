@@ -20,7 +20,8 @@ namespace LIbrary.Controllers
     // The GET parameters name must match the variables names exactly.
     public IActionResult Create(int id, string title, string author, string pub_date)
     {
-      return View();
+      ViewBag.Authors = AuthorsController.GetAuthors();
+        return View();
     }
 
     public IActionResult List()
@@ -35,7 +36,7 @@ namespace LIbrary.Controllers
     }
     
     // Methods
-    public static void CreateBook( string _title, int _authorID, DateTime _pubDate, DateTime _checkedOutDate)
+    public static void CreateBook( string _title, int _authorID, DateTime _pubDate)
     {
       // This method will create a Book object and add it to the Books list.
       using (LibraryContext context = new LibraryContext())
@@ -44,9 +45,10 @@ namespace LIbrary.Controllers
         {
           Title = _title,
           PublicationDate = _pubDate,
-          CheckedOutDate = _checkedOutDate,
           AuthorID = _authorID
         });
+        Book newBook = context.Books.Last();
+        BorrowController.CreateBorrow(newBook.ID);
         context.SaveChanges();
       }
       
