@@ -21,20 +21,27 @@ namespace LIbrary.Controllers
     public IActionResult Create(int id, string title, string author, string pub_date)
     {
       ViewBag.Authors = AuthorsController.GetAuthors();
-        return View();
+      return View();
     }
 
     public IActionResult List()
     {
       ViewBag.Overdue = GetOverdueBooks();
+      ViewBag.Books = GetBooks();
       return View();
     }
 
     public IActionResult Details(int id)
     {
+      ViewBag.Book = GetBookByID(id);
       return View();
     }
-    
+    public IActionResult DeleteBook(int id)
+    {
+      DeleteBookByID(id);
+      return RedirectToAction("List");
+    }
+
     // Methods
     public static void CreateBook( string _title, int _authorID, DateTime _pubDate)
     {
@@ -89,7 +96,7 @@ namespace LIbrary.Controllers
       // This method will return a specific book with the given ID.
       using (LibraryContext context = new LibraryContext())
       {
-        return context.Books.Where(x => x.ID == _id).SingleOrDefault();
+        return context.Books.Include(x=> x.Borrows).Include(x=>x.Author).Where(x => x.ID == _id).SingleOrDefault();
       }
     }
     public static List<Book> GetOverdueBooks()
@@ -97,12 +104,8 @@ namespace LIbrary.Controllers
       // This method will get a list of all books that have a duedate prior to the current date.
       using (LibraryContext context = new LibraryContext())
       {
-        // Stuck on this SQL Statement.
-
-        // Collection of Books overdue
-        // Grab their BookID
-        // Compare to collection of Books ID
-        /*context.Books.Where(x => x.ID == context.Borrows.Where(z=>z.BookID == context.Borrows.Where(y => y.DueDate < DateTime.Today)));*/
+        // Need to implement logic to remove books that have a return date.
+        // Thank you to Aaron Barthel for helping me with the LINQ method syntax to obtain books overdue.
         return context.Books.Where(x => x.Borrows.Any(y => y.DueDate < DateTime.Today)).ToList();
       }
     }

@@ -5,15 +5,16 @@
 
 <h1>Details</h1>
 
-@if(ViewBag.Book.Title != null)
+@if (ViewBag.Book.Title != null)
 {
-    <p>
-        You have checked out @(ViewBag.Book.Title) on @(ViewBag.Book.CheckedOutDate), and the due date is @(ViewBag.Book.DueDate).
-    </p>
-
-    <button>Extend Due Date</button>
-    <button>Return Book</button>
-    <button>Delete Book</button>
+    <h1>@(ViewBag.Book.Title)</h1>
+    @foreach (Borrow borrow in ViewBag.Book.Borrows)
+    {
+        <p>Borrow #: @(borrow.ID)</p>
+        <a href="/Borrow/ExtendDueDate?id=@(borrow.ID)">Extend Due Date</a>
+        <a href="/Borrow/ExtendDueDate?id=@(borrow.ID)">Return Book</a>
+    }
+    <a href="/Book/DeleteBook?id=@(ViewBag.Book.ID)">Delete Book</a>
 }
 else
 {

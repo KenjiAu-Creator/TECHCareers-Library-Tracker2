@@ -5,9 +5,9 @@
 
 <h1>List</h1>
 
-@if(ViewBag.Overdue.Count > 0)
+@if(ViewBag.Books.Count > 0)
 {
-    @foreach(Book book in ViewBag.Overdue)
+    @foreach(Book book in ViewBag.Books)
     {
         <li><a href="/Book/Details/@(book.ID)">@(book.Title) by @(book.Author)</a></li>
     }

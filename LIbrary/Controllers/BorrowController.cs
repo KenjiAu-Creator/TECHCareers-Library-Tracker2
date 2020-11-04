@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,9 +20,23 @@ namespace LIbrary.Controllers
       return View();
     }
 
+    public IActionResult ExtendDueDate(int id)
+    {
+      ExtendDueDateForBorrowByID(id);
+      // Should change to details with dictionary to pass in book id
+      return RedirectToAction("List");
+    }
+    public IActionResult Return(int id)
+    {
+      ReturnBorrowByID(id);
+      // Should change to details with dictionary to pass in book id
+      return RedirectToAction("List");
+    }
+
     public static void ExtendDueDateForBorrowByID(int _id)
     {
       // This method will extend the DueDate on the borrow table for a given ID.
+      Debug.WriteLine(_id);
       using (LibraryContext context = new LibraryContext())
       {
         Borrow borrowedBook = context.Borrows.Where(x => x.ID == _id).SingleOrDefault();
