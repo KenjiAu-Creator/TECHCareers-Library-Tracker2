@@ -11,8 +11,6 @@ namespace LIbrary.Controllers
 {
   public class BookController : Controller
   {
-    public static List<Book> Books = new List<Book>();
-
     public IActionResult Index()
     {
       return RedirectToAction("List");
