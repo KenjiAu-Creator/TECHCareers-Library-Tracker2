@@ -46,6 +46,7 @@ namespace LIbrary.Controllers
     public static void CreateBook( string _title, int _authorID, DateTime _pubDate)
     {
       // This method will create a Book object and add it to the Books list.
+      // Format Pub date to only have the month and year.
       using (LibraryContext context = new LibraryContext())
       {
         context.Books.Add(new Book()

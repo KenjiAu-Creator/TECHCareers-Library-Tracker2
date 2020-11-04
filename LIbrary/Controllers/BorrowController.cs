@@ -15,9 +15,11 @@ namespace LIbrary.Controllers
       return View();
     }
 
-    public IActionResult Create()
+    public IActionResult Create(int bookID)
     {
-      return View();
+      CreateBorrow(bookID);
+      // Should change to details with dictionary to pass in book id
+      return RedirectToAction("List");
     }
 
     public IActionResult ExtendDueDate(int id)

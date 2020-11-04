@@ -8,12 +8,24 @@
 @if (ViewBag.Book.Title != null)
 {
     <h1>@(ViewBag.Book.Title)</h1>
+    <table>
+        <tr>
+        <th>Publication Year</th>
+        <th>Number of Copies out</th>
+        </tr>
+        <tr>
+            <td>@(ViewBag.Book.PublicationDate)</td>
+            <td>@(ViewBag.Book.Borrows.Count)</td>
+        </tr>
+    </table>
     @foreach (Borrow borrow in ViewBag.Book.Borrows)
     {
         <p>Borrow #: @(borrow.ID)</p>
         <a href="/Borrow/ExtendDueDate?id=@(borrow.ID)">Extend Due Date</a>
         <a href="/Borrow/ExtendDueDate?id=@(borrow.ID)">Return Book</a>
     }
+    <p>Borrow this book!</p>
+    <a href="/Borrow/Create?bookID=@(ViewBag.Book.ID)">Borrow!</a>
     <a href="/Book/DeleteBook?id=@(ViewBag.Book.ID)">Delete Book</a>
 }
 else
