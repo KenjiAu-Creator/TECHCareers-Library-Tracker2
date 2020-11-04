@@ -24,6 +24,10 @@ namespace LIbrary
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddControllersWithViews();
+      // Add is needed for scaffolding the Author.
+      // This line is needed to allow the program to correctly link the DB context.
+      // The program will not know how to interact with the DB otherwise.
+      services.AddDbContext<Models.LibraryContext>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

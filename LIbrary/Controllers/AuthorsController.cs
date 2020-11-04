@@ -21,9 +21,9 @@ namespace LIbrary.Controllers
         // GET: Authors
         public async Task<IActionResult> Index()
         {
-            /*List<Author> TestList = GetAuthors();
-            ViewBag.Authors = TestList;*/
-            return View(await _context.Author.ToListAsync());
+      List<Author> TestList = GetAuthors();
+      ViewBag.Authors = TestList;
+      return View(await _context.Author.ToListAsync());
         }
 
         // GET: Authors/Details/5
