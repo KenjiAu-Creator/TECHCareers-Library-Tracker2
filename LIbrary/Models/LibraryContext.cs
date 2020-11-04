@@ -9,8 +9,10 @@ namespace LIbrary.Models
 {
   public class LibraryContext : DbContext
   {
+    // These Database sets are so that when you call context  in the controllers you have access to the respective tables.
     public DbSet<LIbrary.Models.Author> Author { get; set; }
     public DbSet<Borrow> Borrows { get; set; }
+    public DbSet<Book> Books { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

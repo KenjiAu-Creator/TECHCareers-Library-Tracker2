@@ -26,6 +26,9 @@ namespace LIbrary.Models
     [Column(TypeName = "date")]
     public DateTime PublicationDate { get; set; }
 
+    [Column(TypeName = "date")]
+    public DateTime CheckedOutDate { get; set; }
+
     [Column(TypeName = "int(10)")]
     public int AuthorID { get; set; }
 

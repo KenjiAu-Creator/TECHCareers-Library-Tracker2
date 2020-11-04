@@ -157,8 +157,7 @@ namespace LIbrary.Controllers
       // This method will return a list of authors.
       using (LibraryContext context = new LibraryContext())
       {
-        List<Author> AuthorList = context.Author.ToList();
-        return AuthorList;
+        return context.Author.ToList();
       }
     }
     }
