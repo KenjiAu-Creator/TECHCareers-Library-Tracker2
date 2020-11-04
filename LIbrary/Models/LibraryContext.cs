@@ -10,6 +10,7 @@ namespace LIbrary.Models
   public class LibraryContext : DbContext
   {
     public DbSet<LIbrary.Models.Author> Author { get; set; }
+    public DbSet<Borrow> Borrows { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

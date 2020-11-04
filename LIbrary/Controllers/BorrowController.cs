@@ -22,11 +22,22 @@ namespace LIbrary.Controllers
     public static void ExtendDueDateForBorrowByID(int _id)
     {
       // This method will extend the DueDate on the borrow table for a given ID.
+      using (LibraryContext context = new LibraryContext())
+      {
+        Borrow borrowedBook = context.Borrows.Where(x => x.ID == _id).SingleOrDefault();
+        borrowedBook.DueDate.AddDays(7);
+      }
+
     }
 
     public static void ReturnBorrowByID(int _id)
     {
       // This method will return the book on the borrow table for a given ID.
+      using( LibraryContext context = new LibraryContext())
+      {
+        Borrow borrowedBook = context.Borrows.Where(x => x.ID == _id).SingleOrDefault();
+        borrowedBook.ReturnedDate = DateTime.Today;
+      }
     }
 
     public static void CreateBorrow(int _bookID)

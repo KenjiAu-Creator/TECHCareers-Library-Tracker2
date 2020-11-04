@@ -8,6 +8,13 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+@if(ViewBag.Authors.Count > 0)
+{
+    @foreach(Author author in ViewBag.Authors)
+    {
+        <p>@(author.Name)</p>
+    }
+}
 <table class="table">
     <thead>
         <tr>

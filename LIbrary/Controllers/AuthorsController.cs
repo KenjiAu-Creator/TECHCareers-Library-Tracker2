@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LIbrary.Models;
+using System.Diagnostics;
 
 namespace LIbrary.Controllers
 {
@@ -21,8 +22,8 @@ namespace LIbrary.Controllers
         // GET: Authors
         public async Task<IActionResult> Index()
         {
-      List<Author> TestList = GetAuthors();
-      ViewBag.Authors = TestList;
+       List<Author> TestList = GetAuthors();
+       ViewBag.Authors = TestList;
       return View(await _context.Author.ToListAsync());
         }
 
@@ -153,12 +154,12 @@ namespace LIbrary.Controllers
 
       public static List<Author> GetAuthors()
       {
-        // This method will return a list of authors.
-        using (LibraryContext context = new LibraryContext())
-        {
-          List<Author> AuthorList = context.Author.ToList();
-          return AuthorList;
-        }
+      // This method will return a list of authors.
+      using (LibraryContext context = new LibraryContext())
+      {
+        List<Author> AuthorList = context.Author.ToList();
+        return AuthorList;
       }
+    }
     }
 }
