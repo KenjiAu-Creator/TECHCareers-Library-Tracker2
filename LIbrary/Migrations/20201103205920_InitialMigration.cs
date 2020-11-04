@@ -74,12 +74,12 @@ namespace LIbrary.Migrations
                 table: "book",
                 column: "AuthorID");
 
-            migrationBuilder.CreateIndex(
-                name: "FK_Borrow_Book",
-                table: "borrow",
-                column: "BookID",
-                unique: true);
-        }
+      migrationBuilder.CreateIndex(
+          name: "FK_Borrow_Book",
+          table: "borrow",
+          column: "BookID",
+          unique: true);
+    }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {

@@ -132,8 +132,8 @@ namespace LIbrary.Models
 
         // FK Creation
         entity.HasOne(thisEntity => thisEntity.Book)
-        .WithOne(parent => parent.Borrow)
-        .HasForeignKey<Borrow>(thisEntity => thisEntity.BookID)
+        .WithMany(parent => parent.Borrows)
+        .HasForeignKey(thisEntity => thisEntity.BookID)
         .OnDelete(DeleteBehavior.NoAction)
         .HasConstraintName(keyName);
 
@@ -165,6 +165,6 @@ namespace LIbrary.Models
           }
           );
       });
-    }
+      }
   }
 }

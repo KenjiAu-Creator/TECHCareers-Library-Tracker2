@@ -3,14 +3,16 @@ using System;
 using LIbrary.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LIbrary.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    partial class LibraryContextModelSnapshot : ModelSnapshot
+    [Migration("20201104011053_RemoveBorrowFK")]
+    partial class RemoveBorrowFK
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -141,35 +143,9 @@ namespace LIbrary.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("BookID")
-                        .HasName("FK_Borrow_Book");
+                    b.HasIndex("BookID");
 
                     b.ToTable("borrow");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = -1,
-                            BookID = -1,
-                            CheckedOutDate = new DateTime(2019, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DueDate = new DateTime(2020, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnedDate = new DateTime(2020, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            ID = -2,
-                            BookID = -2,
-                            CheckedOutDate = new DateTime(2019, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DueDate = new DateTime(2020, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnedDate = new DateTime(2020, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            ID = -3,
-                            BookID = -3,
-                            CheckedOutDate = new DateTime(2019, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DueDate = new DateTime(2020, 1, 8, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("LIbrary.Models.Book", b =>
@@ -187,8 +163,7 @@ namespace LIbrary.Migrations
                     b.HasOne("LIbrary.Models.Book", "Book")
                         .WithMany("Borrows")
                         .HasForeignKey("BookID")
-                        .HasConstraintName("FK_Borrow_Book")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

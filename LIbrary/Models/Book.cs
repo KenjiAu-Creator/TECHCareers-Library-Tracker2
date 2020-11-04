@@ -10,6 +10,11 @@ namespace LIbrary.Models
   [Table("book")]
   public class Book
   {
+    public Book()
+    {
+      Borrows = new HashSet<Borrow>();
+    }
+
     [Key]
     [Column(TypeName = "int(10)")]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -31,8 +36,8 @@ namespace LIbrary.Models
     public virtual Author Author { get; set; }
 
     // Point Inverse property to Borrow.
-    // One Book has One borrow associated with it.
+    // One Book Title can have zero to many borrows associated with it.
     [InverseProperty(nameof(Models.Borrow.Book))]
-    public virtual Borrow Borrow { get; set; }
+    public virtual ICollection<Borrow> Borrows { get; set; }
   }
 }

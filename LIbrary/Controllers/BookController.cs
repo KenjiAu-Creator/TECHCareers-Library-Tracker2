@@ -39,11 +39,11 @@ namespace LIbrary.Controllers
       
     }
 
-    public static Book GetBookByID(int _id)
+/*    public static Book GetBookByID(int _id)
     {
       // This method will return a Book object with the given ID from the Books list.
-      return Books.Where(x => x.ID == _id).SingleOrDefault();
-    }
+      // return Books.Where(x => x.ID == _id).SingleOrDefault();
+    }*/
 
     public static void ExtendDueDateForBookByID(int _id)
     {

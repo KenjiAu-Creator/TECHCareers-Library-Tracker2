@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LIbrary.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +32,20 @@ namespace LIbrary.Controllers
     public static void CreateBorrow(int _bookID)
     {
       // This method will create a new Borrow entity.
-    }
+      DateTime _checkOut = DateTime.Today;
+      Borrow newBorrow = new Borrow()
+      {
+        CheckedOutDate = _checkOut,
+        DueDate = _checkOut.AddDays(14),
+        ReturnedDate = null,
+        BookID = _bookID
+      };
 
+      using (LibraryContext context = new LibraryContext())
+      {
+        context.Add(newBorrow);
+        context.SaveChanges();
+      }
+    }
   }
 }
