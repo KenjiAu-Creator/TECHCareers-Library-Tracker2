@@ -18,21 +18,31 @@ namespace LIbrary.Controllers
     public IActionResult Create(int bookID)
     {
       CreateBorrow(bookID);
-      // Should change to details with dictionary to pass in book id
-      return RedirectToAction("List");
+      // Code snippet for getting the proper parameters to be passed into the redirect.
+      // https://www.codegrepper.com/code-examples/csharp/asp.net+core+redirecttoaction+with+parameters
+      // https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.redirecttoaction?view=aspnetcore-3.1
+      return RedirectToAction("Details", "Book", new { id = bookID });
     }
 
     public IActionResult ExtendDueDate(int id)
     {
       ExtendDueDateForBorrowByID(id);
-      // Should change to details with dictionary to pass in book id
-      return RedirectToAction("List");
+      int bookID;
+      using (LibraryContext context = new LibraryContext())
+      {
+        bookID = context.Borrows.Where(x => x.ID == id).SingleOrDefault().BookID;
+      }
+      return RedirectToAction("Details", "Book", new { id = bookID });
     }
     public IActionResult Return(int id)
     {
+      int bookID;
       ReturnBorrowByID(id);
-      // Should change to details with dictionary to pass in book id
-      return RedirectToAction("List");
+      using (LibraryContext context = new LibraryContext())
+      {
+        bookID = context.Borrows.Where(x => x.ID == id).SingleOrDefault().BookID;
+      }
+      return RedirectToAction("Details", "Book", new { id = bookID });
     }
 
     public static void ExtendDueDateForBorrowByID(int _id)

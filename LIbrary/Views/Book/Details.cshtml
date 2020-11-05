@@ -22,7 +22,7 @@
     {
         <p>Borrow #: @(borrow.ID)</p>
         <a href="/Borrow/ExtendDueDate?id=@(borrow.ID)">Extend Due Date</a>
-        <a href="/Borrow/ExtendDueDate?id=@(borrow.ID)">Return Book</a>
+        <a href="/Borrow/Return?id=@(borrow.ID)">Return Book</a>
     }
     <p>Borrow this book!</p>
     <a href="/Borrow/Create?bookID=@(ViewBag.Book.ID)">Borrow!</a>
