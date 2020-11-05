@@ -20,7 +20,7 @@
     </table>
     @foreach (Borrow borrow in ViewBag.Book.Borrows)
     {
-        <p>Borrow #: @(borrow.ID)</p>
+        <p>Borrow #: @(borrow.ID), DueDate: @(borrow.DueDate), Returned?: @if (borrow.ReturnedDate == null) { <span>No</span> }else{<span>Yes</span>}</p>
         <a href="/Borrow/ExtendDueDate?id=@(borrow.ID)">Extend Due Date</a>
         <a href="/Borrow/Return?id=@(borrow.ID)">Return Book</a>
     }
