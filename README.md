@@ -1,4 +1,4 @@
-# ASP.NET Core Pratice - Library Due Date Tracker
+# ASP.NET Core Pratice - Library Due Date Tracker Day 2
 This practice is a part of the TECHCareers Software Developer Program.
 
 ## Introduction
